@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import System from "../../System";
 
-export const DateCounter = () => {
+export const DateCounter = (props) => {
   const [system, setSystem] = React.useState(undefined);
   function setLayout() {
     setSystem({
@@ -13,6 +13,6 @@ export const DateCounter = () => {
     useEffect(() => {
       setLayout();
   }, []);
-  return <System system={system} />;
+  return <System system={system} {...props} />;
 };
 

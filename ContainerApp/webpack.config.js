@@ -1,6 +1,6 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ModuleFederationPlugin =
-  require("webpack").container.ModuleFederationPlugin;
+require("webpack").container.ModuleFederationPlugin;
 const path = require("path");
 
 module.exports = {
@@ -11,7 +11,8 @@ module.exports = {
     port: 4001,
   },
   output: {
-    publicPath: "auto",
+     publicPath: 'auto',
+     chunkFilename: "[id].[contenthash].js",
   },
   module: {
     rules: [
@@ -21,6 +22,8 @@ module.exports = {
         exclude: /node_modules/,
         options: {
           presets: ["@babel/preset-react"],
+
+
         },
       },
     ],
@@ -28,7 +31,14 @@ module.exports = {
   plugins: [
     new ModuleFederationPlugin({
       name: "Container",
-      library: { type: 'var', name: 'container' },
+      library: { type: 'var', name: 'Container' },
+      exposes: {
+        './Container':'./src/App.js',
+
+      },
+      remotes:{
+        ReduxStore :'ReduxStore@http://localhost:4004/remoteEntry.js'
+      },
       shared: {
         react: {
           import: 'react', // the "react" package will be used a provided and fallback module

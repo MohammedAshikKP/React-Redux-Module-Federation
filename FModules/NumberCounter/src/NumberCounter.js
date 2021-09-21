@@ -1,19 +1,20 @@
-import React, { useEffect } from 'react';
+import React, { useEffect ,useContext, useState} from 'react';
 import { useDispatch, useSelector } from "react-redux"
 import Button from "./Components/Button";
 import RedColouredH1 from "./Components/RedColouredH1";
-export const NumberCounter = (props) => {
-    const dispatch = useDispatch();
-    const number = useSelector((state) => state.CounterReducer.value)
-    const action = useSelector((state) => state)
-        useEffect(()=>{
-        console.log("rendered number counter");
-    },[])
+
+
+import System from './CustomSystem'
+
+export const NumberCounter=(props) => {
+
+   console.log('Number ',System());
+
     return (
         <>
-            <RedColouredH1 number={number}></RedColouredH1>
-            <Button displayText="Inc" onClick={() => dispatch({type:'INCREMENT_ONE'})}></Button>
-            <Button displayText="Dec" onClick={() =>  dispatch({type:'DECREMENT_ONE'})}></Button>
+            <RedColouredH1 number={22}></RedColouredH1>
+            <Button displayText="Inc" onClick={() => console.log()}></Button>
+            <Button displayText="Dec" onClick={() => console.log()}></Button>
         </>
     )
 }

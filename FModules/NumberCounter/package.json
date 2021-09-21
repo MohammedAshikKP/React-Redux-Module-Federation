@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": " webpack serve",
-    "build": "webpack --mode production",
+    "build": "webpack && webpack serve",
     "build:prod": "npm run build:style && webpack --config webpack.js --mode production",
-    "serve": "serve dist -p 3010",
+    "serve": "serve dist -p 4003",
     "build:prod:local": "npm run build:style && webpack --config webpack.config.js --mode production"
   },
   "keywords": [],

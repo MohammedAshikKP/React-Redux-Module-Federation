@@ -6,7 +6,7 @@ export const NumberCounter = (props) => {
   function setLayout() {
     setSystem({
       url: "http://localhost:4003/remoteEntry.js",
-      scope: "NumberCounter",
+      scope: "NumberCounter1",
       module: "./NumberCounter",
     });
   }

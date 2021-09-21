@@ -1,37 +1,16 @@
-/* eslint-disable react/jsx-props-no-spreading */
-/* eslint-disable react/prop-types */
-/* eslint-disable react/destructuring-assignment */
-/* eslint-disable no-undef */
+
 import React from 'react';
-// import Loader from './common/loader';
+
 const Loader=()=><p>loading..</p>
 
-
-
-class Custom {
-
-    constructor(scope,module){
-        this.scope = scope;
-        this.module = module;
-        this.Module = null;
-    }
-
-    loadComponent = (scope, module) => async () => {
-    // Initializes the share scope. This fills it with known provided modules from this build and all remotes
+const loadComponent = async (scope,module) => {
     await __webpack_init_sharing__('default');
-    const container = window['ReduxStore']; // or get the container somewhere else
-    // Initialize the container, it may provide shared modules
+    const container = window[scope]; // or get the container somewhere else
     await container.init(__webpack_share_scopes__.default);
-    const factory = await window['ReduxStore'].get('./Store');
+    const factory = await window[scope].get(module);
     const Module = factory();
-    this.Module= Module;
-    return Module;
-    };
-
-
-
-}
-
+    return Module
+};
 
 const useDynamicScript = (args) => {
     const [ready, setReady] = React.useState(false);
@@ -76,28 +55,24 @@ const useDynamicScript = (args) => {
     };
 };
 
-async function System(props) {
+
+ const System =  async (props) => {
     const { ready, failed } = useDynamicScript({
         url: 'http://localhost:4004/remoteEntry.js',
     });
 
-    // if (!props.system) {
-    //     return <Loader />;
-    // }
-
-    // if (!ready) {
-    //     return <h2>Loading dynamic script: {props.system.url}</h2>;
-    // }
 
     if (!ready) {
         return <Loader />;
     }
 
     if (failed) {
-        return <h2>Failed to load dynamic script: {'http://localhost:4004/remoteEntry.js'}</h2>;
+        return <h2>Failed to load dynamic script:http://localhost:4004/remoteEntry.js</h2>;
     }
-     const Component = await new Custom().loadComponent();
-     return Component
-
+    
+    const Component =   await loadComponent('ReduxStore', './Store');
+    console.log('---------',Component);
+    return  Component
 }
+
 export default System;

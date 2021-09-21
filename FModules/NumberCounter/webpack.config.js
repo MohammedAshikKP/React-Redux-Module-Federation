@@ -29,10 +29,13 @@ module.exports = {
   },
   plugins: [
     new ModuleFederationPlugin({
-      name: "NumberCounter",
+      name: "NumberCounter1",
       filename: "remoteEntry.js",
       exposes: {
         './NumberCounter': './src/NumberCounter',
+      },
+      remotes:{
+        ReduxStore :'ReduxStore'
       },
       shared: {
         react: {

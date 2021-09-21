@@ -1,5 +1,5 @@
 {
-  "name": "ContainerApp",
+  "name": "@ContainerApp",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -15,7 +15,7 @@
   },
   "scripts": {
     "start": "webpack-cli serve",
-    "build": "webpack --mode production",
+    "build": "webpack",
     "serve": "serve dist -p 3001",
     "clean": "rm -rf dist"
   },

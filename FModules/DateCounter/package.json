@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": " webpack serve",
-    "build": "webpack --mode production",
+    "build": "webpack --mode production && webpack serve",
     "build:prod": "npm run build:style && webpack --config webpack.js --mode production",
     "serve": "serve dist -p 3010",
     "build:prod:local": "npm run build:style && webpack --config webpack.config.js --mode production"

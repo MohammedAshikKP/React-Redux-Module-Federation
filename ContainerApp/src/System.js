@@ -5,7 +5,10 @@
 import React from 'react';
 // import Loader from './common/loader';
 const Loader=()=><p>loading..</p>
+
+
 export const loadComponent = (scope, module) => async () => {
+    console.log('---->',scope,module);
     // Initializes the share scope. This fills it with known provided modules from this build and all remotes
     await __webpack_init_sharing__('default');
     const container = window[scope]; // or get the container somewhere else
@@ -60,7 +63,6 @@ const useDynamicScript = (args) => {
 };
 
 function System(props) {
-    console.log("sys props: " ,props);
     const { ready, failed } = useDynamicScript({
         url: props.system && props.system.url,
     });

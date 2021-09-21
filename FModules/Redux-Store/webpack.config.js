@@ -30,9 +30,13 @@ module.exports = {
     new ModuleFederationPlugin({
       name: "ReduxStore",
       filename: "remoteEntry.js",
+      library: {type: "var",name:'ReduxStore'},
       exposes: {
-        './store':'./remoteentry.js',
+        './Store':'./store.js',
 
+      },
+      remotes:{
+          Container : 'Container@https://localhost:4001'
       },
       shared: {
         react: {

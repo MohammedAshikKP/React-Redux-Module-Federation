@@ -4,14 +4,10 @@ import Button from "./Components/Button";
 import Input from "./Components/Input";
 import RedColouredH1 from "./Components/RedColouredH1";
 
-const INCREMENT_DATE="INCREMENT_DATE"
-const DECREMENT_DATE="DECREMENT_DATE"
- const increment_date=(payload)=>({type:INCREMENT_DATE,payload})
- const decrement_date=(payload)=>({type:DECREMENT_DATE,payload})
 
 
 
-export const DateCounter = () => {
+export const DateCounter = ({actions,selectors}) => {
     useEffect(()=>{
         console.log("rendered date counter");
     },[])
@@ -21,13 +17,13 @@ export const DateCounter = () => {
 
      const [s, sets] = useState(0);
 
-     
-    const date = useSelector((state) => state.DateCounterReducer.date)
+
+    const date = useSelector(selectors.date)
     return (<>
         <RedColouredH1 number={new Date(date).toDateString()}></RedColouredH1>
         <Input value={s} onChange={({ target: { value } }) => sets(value)} />
-        <Button displayText="Inc" onClick={() => dispatch(increment_date(s))}></Button>
-        <Button displayText="Dec" onClick={() => dispatch(decrement_date(s))}></Button>
+        <Button displayText="Inc" onClick={() => dispatch(actions.increment_date(s))}></Button>
+        <Button displayText="Dec" onClick={() => dispatch(actions.decrement_date(s))}></Button>
     </>)
 }
 
